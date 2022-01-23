@@ -1,7 +1,7 @@
 //Universal inputs for a single-player game
 
 global.currentGP = -1;		//Gamepad currently in use
-global.usingKB = true;		//If user is currently using the keyboard
+global.usingKB = true;		//If user is currently using the keyboard (Mostly to be used by in-game prompts)
 
 //Use an an system async. event in a game controller
 //Updates the currently connected controller
@@ -11,9 +11,10 @@ function updateController() {
 	for (var i=0; i<gamepad_get_device_count(); i++) {
 		if gamepad_is_connected(i) {
 			global.currentGP = i;
-			global.usingKB = false;
 		}
 	}
+	
+	global.usingKB = (global.currentGP == -1);
 }
 
 //Where the meat of inputs come in
